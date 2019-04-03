@@ -7,17 +7,16 @@ $("#start").on('click', trivia.startGame);
 })
 */
 
-//$(document).ready(function(){
+$(document).ready(function(){
   
-    // event listeners
+    //button and click controls
     $("#remaining-time").hide();
     $("#start").on('click', trivia.startGame);
     $(document).on('click' , '.option', trivia.guessChecker);
     
-  //})
-  
+  })
+  //holds our trivia variable and its various properties
   var trivia = {
-    // trivia properties
     correct: 0,
     incorrect: 0,
     unanswered: 0,
@@ -25,91 +24,85 @@ $("#start").on('click', trivia.startGame);
     timer: 20,
     timerOn: false,
     timerId : '',
-    // questions options and answers data
+    // question and answer array
     questions: {
-      q1: 'Who is actually a chef?',
-      q2: 'What does Joey love to eat?',
-      q3: 'How many times has Ross been divorced?',
-      q4: 'How many types of towels does Monica have?',
-      q5: "Who stole Monica's thunder after she got engaged?",
-      q6: 'Who hates Thanksgiving?',
-      q7: "Who thinks they're always the last to find out everything?"
+      q1: "Which of these films belongs to the period known as 'the Disney Renaissance?'",
+      q2: "Which of these films is not produced by Disney?",
+      q3: "Which character is not a Disney princess?",
+      q4: "Which animated film has not yet been adapted to live action?",
+      q5: "What is Moana's animal sidekick named?",
+      q6: "Which movie features the song 'When You wish Upon a Star?'",
+      q7: "Which Disney/Pixar film has NOT won the Best Animated feature Oscar?"
     },
     options: {
-      q1: ['Monica', 'Chandler', 'Rachel', 'Ross'],
-      q2: ['Fish', 'Apples', 'Oranges', 'Sandwhiches'],
-      q3: ['5', '2', '1', '3'],
-      q4: ['3', '8', '11', '6'],
-      q5: ['Rachel','Phoebe','Emily','Carol'],
-      q6: ['Joey','Chandler','Rachel','Ross'],
-      q7: ['Ross', 'Phoebe', 'Monica','Chandler']
+      q1: ["Snow White & the Seven Dwarfs", "Frozen", "The Little Mermaid", "The Jungle Book"],
+      q2: ["Star Wars: The Last Jedi", "Tron: Legacy", "Avengers: Endgame", "How to Train Your Dragon"],
+      q3: ["Rapunzel", "Tiana", "Vanellope", "Merida"],
+      q4: ["Hercules", "Beauty and the Beast", "Cinderella", "Dumbo"],
+      q5: ["Iago","Scrump","Pua","Tamatoa"],
+      q6: ["Pinocchio","Peter Pan","Robin Hood","Alice in Wonderland"],
+      q7: ["Coco", "Brave", "Incredibles 2","Finding Nemo"]
     },
     answers: {
-      q1: 'Monica',
-      q2: 'Sandwhiches',
-      q3: '3',
-      q4: '11',
-      q5: 'Rachel',
-      q6: 'Chandler',
-      q7: 'Phoebe'
+      q1: "The Little Mermaid",
+      q2: "How to Train Your Dragon",
+      q3: "Vanellope",
+      q4: "Hercules",
+      q5: "Pua",
+      q6: "Pinocchio",
+      q7: "Incredibles 2"
     },
-    // trivia methods
-    // method to initialize game
+    
+    // function to start the game
     startGame: function(){
-      // restarting game results
       trivia.currentSet = 0;
       trivia.correct = 0;
       trivia.incorrect = 0;
       trivia.unanswered = 0;
       clearInterval(trivia.timerId);
       
-      // show game section
+      // display
       $('#game').show();
       
-      //  empty last results
+      //  display results
       $('#results').html('');
-      
-      // show timer
+       
       $('#timer').text(trivia.timer);
       
-      // remove start button
+      // hide button
       $('#start').hide();
   
       $('#remaining-time').show();
       
-      // ask first question
       trivia.nextQuestion();
       
     },
-    //method to loop through and display questions and options 
+
+    // function for going through our questions
     nextQuestion : function(){
-      
-      // set timer to 20 seconds each question
-      trivia.timer = 20;
+      trivia.timer = 12;
        $('#timer').removeClass('last-seconds');
       $('#timer').text(trivia.timer);
       
-      // to prevent timer speed up
+    
       if(!trivia.timerOn){
         trivia.timerId = setInterval(trivia.timerRunning, 1000);
       }
       
-      // gets all the questions then indexes the current questions
       var questionContent = Object.values(trivia.questions)[trivia.currentSet];
       $('#question').text(questionContent);
       
-      // an array of all the user options for the current question
+      // array
       var questionOptions = Object.values(trivia.options)[trivia.currentSet];
       
-      // creates all the trivia guess options in the html
+      // displays the options 
       $.each(questionOptions, function(index, key){
         $('#options').append($('<button class="option btn btn-info btn-lg">'+key+'</button>'));
       })
       
     },
-    // method to decrement counter and count unanswered if timer runs out
+    // how we decrement timer and record non-answers
     timerRunning : function(){
-      // if timer still has time left and there are still questions left to ask
       if(trivia.timer > -1 && trivia.currentSet < Object.keys(trivia.questions).length){
         $('#timer').text(trivia.timer);
         trivia.timer--;
@@ -117,7 +110,7 @@ $("#start").on('click', trivia.startGame);
             $('#timer').addClass('last-seconds');
           }
       }
-      // the time has run out and increment unanswered, run result
+      // if timer reaches 0, add to incorrect total 
       else if(trivia.timer === -1){
         trivia.unanswered++;
         trivia.result = false;
@@ -128,7 +121,7 @@ $("#start").on('click', trivia.startGame);
       // if all the questions have been shown end the game, show results
       else if(trivia.currentSet === Object.keys(trivia.questions).length){
         
-        // adds results of game (correct, incorrect, unanswered) to the page
+        // appends results to page
         $('#results')
           .html('<h3>Thank you for playing!</h3>'+
           '<p>Correct: '+ trivia.correct +'</p>'+
@@ -136,26 +129,26 @@ $("#start").on('click', trivia.startGame);
           '<p>Unaswered: '+ trivia.unanswered +'</p>'+
           '<p>Please play again!</p>');
         
-        // hide game sction
+        // hide
         $('#game').hide();
         
-        // show start button to begin a new game
+        // show button again to start new game
         $('#start').show();
       }
       
     },
-    // method to evaluate the option clicked
+    
     guessChecker : function() {
       
-      // timer ID for gameResult setTimeout
+      // timer ID for gameResult setTimeout/
       var resultId;
       
-      // the answer to the current question being asked
+      // current question and answer
       var currentAnswer = Object.values(trivia.answers)[trivia.currentSet];
       
       // if the text of the option picked matches the answer of the current question, increment correct
       if($(this).text() === currentAnswer){
-        // turn button green for correct
+        // button turns green color for correct response
         $(this).addClass('btn-success').removeClass('btn-info');
         
         trivia.correct++;
@@ -163,9 +156,9 @@ $("#start").on('click', trivia.startGame);
         resultId = setTimeout(trivia.guessResult, 1000);
         $('#results').html('<h3>Correct Answer!</h3>');
       }
-      // else the user picked the wrong option, increment incorrect
+      
       else{
-        // turn button clicked red for incorrect
+        // button turns red for incorrect answer
         $(this).addClass('btn-danger').removeClass('btn-info');
         
         trivia.incorrect++;
@@ -175,10 +168,10 @@ $("#start").on('click', trivia.startGame);
       }
       
     },
-    // method to remove previous question results and options
+    // removes previous results
     guessResult : function(){
       
-      // increment to next question set
+      // takes us to next question
       trivia.currentSet++;
       
       // remove the options and results

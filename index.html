@@ -1,38 +1,50 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>Trivia Game</title>
-    
+
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
-
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/Users/Jaymar/SMU_HW/week5/TriviaGame/assets/css/style.css"> -->
+    
 </head>
 <body>
+  <div class="container">
+    <div class="header text-center clearfix">
+        <h1>Disney Movie Trivia!</h1>
+    </div>
+    <div class="jumbotron jumbotron-fluid">
     <div class="container">
-    <h1>Disney Movie Trivia!</h1>
-    <p id="remaining-time">Time Remaining: <span id="timer"></span></p>
-    <button type="button" class="btn btn-danger" id="start">Start</button>
     <div id="game">
-    <p id="question" class="lead"></p>
-    <p id="quiz"></p>
-    <button type="button" class="btn btn-primary" id="submit">Submit</button>
-    <div id="options">
+        <p id="remaining-time" class="lead">Remaining Time: <span id="timer"></span></p>
+        <p id="question" class="lead"></p>
+    </div>
+    <div id="results">
+    </div>
+    </div>
+
+    <div class="row">
+    <div id="choices" class="text-center">
+        <button type="button" id="start" class="btn btn-danger">Start Game</button>
+        <div id="options">
             
         </div>
-    </div>
-
-    <div id="results">
-        
+          
     </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-    <!--<script type="text/javascript" src="assets/javascript/app.js"></script>-->
+</div> <!-- /container -->
+
+    <!-- jQuery CDN-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript" src="assets/javascript/app.js"></script>
-
-</body>
-</html>
+  </body>
+  </html>
